@@ -1,36 +1,19 @@
-import { useFonts } from "expo-font";
-import "react-native-gesture-handler";
-// import { NavigationContainer } from "@react-navigation/native";
-// import { createStackNavigator } from "@react-navigation/stack";
-import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-// import { LoginScreen } from "./screens/LoginScreen";
-// import { RegistrationScreen } from "./screens/RegistrationScreen";
-// import { Home } from "./screens/Home";
-// import { CommentsScreen } from "./screens/CommentsScreen";
-// import { MapScreen } from "./screens/MapScreen";
+import { LoginScreen } from "../screens/LoginScreen";
+import { RegistrationScreen } from "../screens/RegistrationScreen";
+import { Home } from "../screens/Home";
+import { CommentsScreen } from "../screens/CommentsScreen";
+import { MapScreen } from "../screens/MapScreen";
 
-// import { BackButtonComponent } from "./components/BackButtonComponent";
+import { BackButtonComponent } from "./BackButtonComponent";
 
-import { AppNavigation } from './components/AppNavigation';
+export const AppNavigation = () => {
 
-export default function App() {
-  const [fontsLoaded] = useFonts({
-    "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
-    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
-  });
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
-  // const MainStack = createStackNavigator();
-
-  return (
-    <Provider store={store}>
-      <AppNavigation />
-      {/* <NavigationContainer>
+    const MainStack = createStackNavigator();
+    return(
+        <NavigationContainer>
         <MainStack.Navigator initialRouteName="Login">
           <MainStack.Screen
             name="Home"
@@ -80,7 +63,6 @@ export default function App() {
             }}
           />
         </MainStack.Navigator>
-      </NavigationContainer> */}
-    </Provider>
-  );
+      </NavigationContainer>
+    )
 }
