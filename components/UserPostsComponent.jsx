@@ -10,6 +10,7 @@ export const UserPostsComponent = ({
   country,
   commentsNumber,
   likes,
+  coords,
 }) => {
   const navigation = useNavigation();
 
@@ -17,11 +18,15 @@ export const UserPostsComponent = ({
     navigation.navigate("Comments", { way: way });
   };
 
+  const handleMapRedirect = (coords) => {
+    navigation.navigate("Map", { coords: coords });
+  };
+
   return (
     <View style={{ marginBottom: 32 }}>
       <View style={{ marginBottom: 8 }}>
         <Image
-          source={way}
+          source={typeof way === "number" ? way : { uri: way }}
           resizeMode={"cover"}
           style={{ width: "100%", height: 240, borderRadius: 8 }}
         />
@@ -60,7 +65,9 @@ export const UserPostsComponent = ({
           </View>
         </View>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
-          <LocationIcon />
+          <TouchableOpacity onPress={() => handleMapRedirect(coords)}>
+            <LocationIcon />
+          </TouchableOpacity>
           <Text
             style={[
               styles.text,

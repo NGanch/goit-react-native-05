@@ -1,42 +1,39 @@
-import { ScrollView, View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, FlatList, StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
+import { selectPosts } from "../redux/posts/selectors";
 
 import { globalStyles } from "../components/styles/globalStyles";
 
 import { PostComponent } from "../components/PostComponent";
 
 export const PostsScreen = () => {
+  const posts = useSelector(selectPosts);
+
   return (
-    <ScrollView style={{ flex: 1 }}>
-      <View style={[globalStyles.container, styles.postsContainer]}>
-        <View style={styles.profileContainer}>
-          <View style={styles.userPhoto}>
-            <Image source={require("../components/images/userPhoto.png")} />
-          </View>
-          <View style={{ marginTop: 16 }}>
-            <Text style={styles.name}>Natali Romanova</Text>
-            <Text style={styles.email}>email@example.com</Text>
-          </View>
+    <View style={[globalStyles.container, styles.postsContainer]}>
+      <View style={styles.profileContainer}>
+        <View style={styles.userPhoto}>
+          <Image source={require("../components/images/userPhoto.png")} />
         </View>
-        <PostComponent
-          way={require("../components/images/forest.jpg")}
-          name={"Ліс"}
-          commentsNumber={0}
-          country={"Ivano-Frankivs'k Region, Ukraine"}
-        />
-        <PostComponent
-          way={require("../components/images/sunset.jpg")}
-          name={"Захід на Чорному морі"}
-          commentsNumber={0}
-          country={"Odesa, Ukraine"}
-        />
-        <PostComponent
-          way={require("../components/images/house.jpg")}
-          name={"Старий будиночок у Венеції"}
-          commentsNumber={0}
-          country={"Venece, Italy"}
-        />
+        <View style={{ marginTop: 16 }}>
+          <Text style={styles.name}>Natali Romanova</Text>
+          <Text style={styles.email}>email@example.com</Text>
+        </View>
       </View>
-    </ScrollView>
+      <FlatList
+        data={posts}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <PostComponent
+            way={item.imageUrl}
+            name={item.name}
+            commentsNumber={item.commentsNumber}
+            country={item.location}
+            coords={item.coords}
+          />
+        )}
+      />
+    </View>
   );
 };
 

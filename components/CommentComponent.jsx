@@ -21,13 +21,9 @@ export const CommentComponent = ({
 const styles = StyleSheet.create({
   container: {
     flexShrink: 1,
-
     width: "100%",
-
     padding: 16,
-
     backgroundColor: "#00000008",
-
     borderTopLeftRadius: 0,
     borderTopRightRadius: 6,
     borderBottomLeftRadius: 6,
@@ -36,7 +32,6 @@ const styles = StyleSheet.create({
 
   text: {
     marginBottom: 8,
-
     color: "#212121",
     fontFamily: "Roboto-Regular",
     fontSize: 13,
